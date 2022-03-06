@@ -7,17 +7,23 @@ import { MaterialModule } from '../material.module';
 // componentes personales
 import { NavbarComponent } from './navbar/navbar.component';
 import { TableComponent } from './table/table.component';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
-  declarations: [NavbarComponent, TableComponent],
+  declarations: [
+    NavbarComponent, 
+    TableComponent
+  ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
+    TableComponent
   ]
 })
 export class SharedModule { }
