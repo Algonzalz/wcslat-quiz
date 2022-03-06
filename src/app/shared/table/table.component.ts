@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { promise } from 'protractor';
 import { Character } from 'src/app/core/model/character';
 
 @Component({
@@ -7,28 +8,27 @@ import { Character } from 'src/app/core/model/character';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit, OnChanges  {
+export class TableComponent implements OnInit, AfterViewInit {
 
   @Input() array: Character[];
 
   displayedColumns: string[] = ['name', 'patronus', 'age', 'image'];
   
-  dataSource: MatTableDataSource<Character> = new MatTableDataSource();;
-  constructor() { }
+  dataSource: MatTableDataSource<Character> = new MatTableDataSource(); 
+  
+  constructor(private changeDetectorRefs: ChangeDetectorRef) { }
   
   ngOnInit(): void {
-    if(this.array.length < 0){
-    }
+    console.log(this.array)
   }
   
-  ngOnChanges(changes: SimpleChanges): void {
-      this.dataSource = new MatTableDataSource(this.array);
+  ngAfterViewInit(): void {
+    setTimeout(()=>{
+      this.dataSource = new MatTableDataSource(this.array); 
 
-      //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-      //Add '${implements OnChanges}' to the class.
-      
-    }
-  
+    },1000);
+    
+  }
   
 }
 
